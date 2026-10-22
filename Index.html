@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Brain Math Challenge</title>
+<style>
+body { font-family: sans-serif; text-align: center; background-color: #f0f2f5; }
+.game-container { max-width: 500px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+#question { font-size: 24px; margin-bottom: 20px; }
+input { padding: 10px; font-size: 16px; width: 60%; }
+button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+.result { margin-top: 20px; font-size: 18px; }
+</style>
+</head>
+<body>
+<div class="game-container">
+<h1>Brain Math Challenge</h1>
+<div id="question">Loading puzzle...</div>
+<input type="number" id="answer" placeholder="Your Answer">
+<br><br>
+<button onclick="checkAnswer()">Submit</button>
+<div class="result" id="result"></div>
+</div>
+
+<script>
+let currentAnswer;
+// Simple math puzzle generator
+function generatePuzzle() {
+let num1 = Math.floor(Math.random() * 10) + 1;
+let num2 = Math.floor(Math.random() * 10) + 1;
+currentAnswer = num1 + num2;
+document.getElementById('question').innerHTML = `What is ${num1} + ${num2}?`;
+document.getElementById('result').innerHTML = '';
+}
+
+function checkAnswer() {
+let userAnswer = document.getElementById('answer').value;
+let resultDiv = document.getElementById('result');
+if (parseInt(userAnswer) === currentAnswer) {
+resultDiv.innerHTML = "Correct! Well done.";
+setTimeout(generatePuzzle, 2000);
+} else {
+resultDiv.innerHTML = "Incorrect, try again.";
+}
+document.getElementById('answer').value = '';
+}
+
+generatePuzzle();
+</script>
+</body>
+</html>
